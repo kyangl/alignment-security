@@ -1,4 +1,8 @@
 # Representational Alignment Security
+
+> ⚠️ **This repository is under active construction!**  
+> Features, documentation, and code may change frequently as we continue development.
+
 This repository contains the official code for our paper: 
 > **Alignment and Adversarial Robustness: Are More Human-Like Models More
 > Secure?** [[Paper Link]](https://arxiv.org/abs/2502.12377) \
@@ -27,15 +31,20 @@ Our key findings are:
 - Some forms of alignment improve robustness, others hurt it, highlighting the
   importance of what kind of human-likeness a model achieves. 
 
-## 📁 Project Structure (dummy)
+## 📁 Project Structure
+
 <pre>
 alignment-security/
-├── scripts/ 
-│   ├── main.py 
-│   ├── attack.py 
-│   └── utilities.py 
-├── Dockerfile # Requirements and dependencies
-└── README.md 
+├── .env                    # Environment variables to set if using CHTC
+├── dataloading.py          # Loading data
+├── Dockerfile              # Requirements and dependencies
+├── evaluate_robustness.py  # Main script for loading BrainScore data and attacking models
+├── plotting.py             # Plotting results
+├── README.md
+├── results/                # Folder for experiment outputs and results
+└── utilities.py            # Additional utilities
+</pre>
+</pre>
 </pre>
 
 ## 🧪 Experiments

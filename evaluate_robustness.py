@@ -3,11 +3,9 @@ import logging
 import os
 from dotenv import load_dotenv
 import torch
-import torchvision.datasets as datasets
 from brainscore_vision import load_model
 from torchmetrics.classification import Accuracy
 import csv
-import glob
 import dataloading
 from utilities import progressBar
 from torchattacks import AutoAttack
