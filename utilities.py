@@ -3,6 +3,7 @@ import glob
 import os
 import argparse
 import sys
+import pandas as pd
 
 
 def load_imagenet_json():
@@ -61,3 +62,42 @@ def progressBar(count_value, total, suffix=""):
     bar = "=" * filled_up_Length + "-" * (bar_length - filled_up_Length)
     sys.stdout.write("[%s] %s%s ...%s\r" % (bar, percentage, "%", suffix))
     sys.stdout.flush()
+
+
+def setup_scores(package_path="/opt/homebrew/lib/python3.11/site-packages/"):
+
+    mlist = glob.glob(f"{package_path}/brainscore_vision/models/*/__init__.py")
+
+    og_model_names, reg_model_names = [], []
+    for m in mlist:
+        mname = m.split("/")[-2]
+        with open(m, "r") as f:
+            lines = f.readlines()
+            for l in lines:
+                if "model_registry[" in l:
+                    print(l)
+                    og_model_names.append(mname)
+                    reg_model_names.append(
+                        l.split("model_registry[")[1]
+                        .split("]")[0]
+                        .replace('"', "")
+                        .replace("'", "")
+                    )
+
+    df_new = pd.DataFrame(
+        {"og_model_name": og_model_names, "model_registry_name": reg_model_names}
+    )
+    df_new.to_csv("results/model_names_translated.csv", index=False)
+
+    df_scores = pd.read_csv("results/benchmark_scores/benchmark_scores.csv")
+    df_merged = pd.merge(
+        df_new,
+        df_scores,
+        left_on="model_registry_name",
+        right_on="model_name",
+        how="inner",
+    )
+    df_merged.drop_duplicates(subset="model_registry_name", keep="first", inplace=True)
+    df_merged.to_csv(
+        "results/benchmark_scores/benchmark_scores_registry_merged.csv", index=False
+    )
