@@ -68,6 +68,17 @@ Note: `--gpu all` is required for GPU support. Make sure [NVIDIA Container
 Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html)
 is installed. 
 
+#### Prepare Brain-Score benchmark scores
+- Download the latest Brain-Score benchmark results CSV from the [Brain-Score website](https://www.brain-score.org/).
+- Save the file to `results/benchmark_scores/benchmark_scores.csv` (create the directory if needed).
+- Generate the merged registry file by running:
+  ```
+  python -c "from utilities import setup_scores; setup_scores()"
+  ```
+  - If your `brainscore_vision` package is installed outside the default path, pass it explicitly:  
+    `python -c "from utilities import setup_scores; setup_scores(package_path='/path/to/site-packages')"`
+- This creates `results/benchmark_scores/benchmark_scores_registry_merged.csv`, which is the scores file consumed by the experiment scripts. The helper also writes `results/model_names_translated.csv` for reference.
+
 ### 2. Running Experiments
 
 ## 📎 Citation
