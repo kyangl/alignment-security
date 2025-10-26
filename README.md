@@ -1,8 +1,5 @@
 # Representational Alignment Security
 
-> ⚠️ **This repository is under active construction!**  
-> Features, documentation, and code may change frequently as we continue development.
-
 This repository contains the official code for our paper: 
 > **Alignment and Adversarial Robustness: Are More Human-Like Models More
 > Secure?** [[Paper Link]](https://arxiv.org/abs/2502.12377) \
